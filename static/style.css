@@ -1,0 +1,56 @@
+/* 🔥 Global Styles */
+body {
+    background-color: #0a0a0a;
+    font-family: 'Arial', sans-serif;
+    color: white;
+}
+
+/* 🌟 Glassmorphism Effect */
+.glass {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(15px);
+    border-radius: 15px;
+    padding: 20px;
+    max-width: 900px;
+    margin: 20px auto;
+}
+
+/* 🔮 Future Features Dropdown */
+.relative:hover .group-hover\:block {
+    display: block !important; /* ✅ Removed escaping & ensured visibility */
+}
+
+.group:hover .dropdown {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: scale(1);
+    pointer-events: auto;
+    transition: opacity 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.dropdown {
+    position: absolute;
+    left: 0;
+    top: 100%;
+    width: 180px;
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 10px;
+    border-radius: 8px;
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(0.95);
+    pointer-events: none;
+    transition: opacity 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.story-card {
+    background: rgba(255, 255, 255, 0.8);
+    color: black; /* ✅ Fix: Ensures text is visible */
+    padding: 15px;
+    border-radius: 10px;
+    transition: 0.3s ease-in-out;
+}
+
+.story-card:hover {
+    background: rgba(255, 255, 255, 1);
+}

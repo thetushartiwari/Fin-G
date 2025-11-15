@@ -1,0 +1,141 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fin-G: Finance Guardian</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
+</head>
+<body class="text-white">
+
+    <!-- FRAME DESIGN -->
+    <div class="frame"></div>
+
+    <!-- HEADER -->
+    <header class="p-4 bg-gray-800 flex justify-between items-center glass">
+        <div class="relative group">
+            <a href="#" class="hover:text-blue-400 block">Future Features ⏳</a>
+            <div class="dropdown">
+                <p class="text-sm text-white">🔜 Fin-G Chats (AI Financial Advice)</p>
+                <p class="text-sm text-white">🔜 Investor Social Hub</p>
+            </div>
+        </div>
+        <h1 class="text-2xl font-bold text-center">Fin-G: Finance Guardian</h1>
+        <a href="{% url 'success_stories' %}" class="px-4 py-2 bg-green-500 text-white rounded-lg shadow-lg">
+            Success Stories
+        </a>
+    </header>
+
+    <!-- LANDING PAGE STORY -->
+    <section class="text-center p-12 fade-in">
+        <h2 class="text-4xl font-bold mb-6">Your AI-Powered Finance Guardian</h2>
+        <p class="text-lg">We believe that smart investing should be safe, accessible, and fraud-proof.</p>
+        <p class="text-lg mt-2">Fin-G helps you make informed decisions with AI-driven insights and protects you from scams.</p>
+    </section>
+
+    <!-- SCROLL TRUST BUILDING SECTION -->
+    <section class="glass fade-in p-8">
+        <h2 class="text-3xl font-bold">Why Trust Fin-G? 🔍</h2>
+        <ul class="list-disc mt-4 ml-6">
+            <li>✅ AI-Powered Risk Assessment – Know your investor profile before you invest.</li>
+            <li>✅ Real-Time Market Insights – Avoid misinformation & market hype.</li>
+            <li>✅ Fraud Detection – Get alerts on high-risk stocks & scams.</li>
+        </ul>
+    </section>
+
+    <!-- BUTTON TO SHOW FORM -->
+    <section class="text-center p-12 fade-in" id="startSection" {% if risk_score %}style="display: none;"{% endif %}>
+        <button id="showFormBtn" class="px-6 py-3 bg-blue-500 text-white rounded-lg shadow-lg">
+            Start Your Success Story 🚀
+        </button>
+    </section>
+
+    <!-- RISK FORM -->
+    <section id="riskSection" class="glass fade-in hidden p-8" {% if risk_score %}style="display: none;"{% endif %}>
+        <h2 class="text-xl font-semibold">📊 Get Your Risk Profile</h2>
+        <form method="POST" action="{% url 'analyze_user_investment' %}">
+            {% csrf_token %}
+            <input name="income" type="number" placeholder="Enter your income" class="p-2 mt-2 bg-gray-700 rounded w-full text-white">
+            <input name="savings" type="number" placeholder="Enter your savings" class="p-2 mt-2 bg-gray-700 rounded w-full text-white">
+            <input name="expenses" type="number" placeholder="Enter your expenses" class="p-2 mt-2 bg-gray-700 rounded w-full text-white">
+            
+            <label for="age" class="block mt-4">🎂 Age:</label>
+            <input name="age" type="number" placeholder="Enter your age" class="p-2 bg-gray-700 rounded w-full text-white" required>
+
+            <label for="stockPreference" class="block mt-4">📈 Preferred Stock Sector:</label>
+            <select name="stockPreference" class="p-2 bg-gray-700 rounded w-full text-white" required>
+                <option value="tech">Technology</option>
+                <option value="healthcare">Healthcare</option>
+                <option value="finance">Finance</option>
+                <option value="energy">Energy</option>
+                <option value="consumer Goods">Consumer Goods</option>
+            </select>
+
+            <button type="submit" class="mt-4 px-4 py-2 bg-green-500 rounded w-full">
+                Analyze & Get Recommendations
+            </button>
+        </form>
+    </section>
+
+    <!-- RESULTS SECTION -->
+    {% if risk_score %}
+    <section id="resultsSection" class="glass fade-in p-8">
+        <h2 class="text-2xl font-semibold">📈 Your AI Investment Report</h2>
+
+        {% if risk_score <= 3 %}
+            <p class="text-xl mt-4">🛡 <strong>Your risk appetite is <span class="text-blue-400">Low</span>.</strong> That's why your investment plan will be:</p>
+        {% elif risk_score <= 6 %}
+            <p class="text-xl mt-4">🛡 <strong>Your risk appetite is <span class="text-yellow-400">Moderate</span>.</strong> That's why your investment plan will be:</p>
+        {% else %}
+            <p class="text-xl mt-4">🛡 <strong>Your risk appetite is <span class="text-red-400">High</span>.</strong> That's why your investment plan will be:</p>
+        {% endif %}
+
+        <h3 class="text-lg font-semibold mt-4">📊 Investment Allocation</h3>
+        <ul class="list-disc ml-6">
+            <li>Mutual Funds: ₹{{ allocation.mutual_funds|floatformat:2 }}</li>
+            <li>Stocks: ₹{{ allocation.stocks|floatformat:2 }}</li>
+            <li>SIPs: ₹{{ allocation.sips|floatformat:2 }}</li>
+            <li>Govt Bonds: ₹{{ allocation.Govt_bonds|floatformat:2 }}</li>
+        </ul>
+
+        <h3 class="text-lg font-semibold mt-4">📈 Top Suggested Stocks</h3>
+        {% if top_stocks %}
+            <ul class="list-disc ml-6">
+                {% for stock, return_percent in top_stocks %}
+                    <li>{{ stock }} - <strong>{{ return_percent }}% return</strong></li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No stock recommendations available.</p>
+        {% endif %}
+    </section>
+    {% endif %}
+
+    <!-- FOOTER -->
+    <footer class="p-4 text-center bg-gray-800 mt-10 glass">
+        <p>🔒 Your Trust + Our Guidance = Your Growth.</p>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            gsap.to(".fade-in", { opacity: 1, y: 0, duration: 1.5, stagger: 0.3 });
+
+            {% if risk_score %}
+                document.getElementById("resultsSection").style.display = "block";
+            {% endif %}
+        });
+
+        document.getElementById("showFormBtn").addEventListener("click", () => {
+            gsap.to("#riskSection", { opacity: 1, y: 0, duration: 1 });
+            document.getElementById("riskSection").style.display = "block";
+            document.getElementById("startSection").style.display = "none";
+        });
+    </script>
+
+</body>
+</html>
+
+

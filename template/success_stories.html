@@ -1,0 +1,46 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Success Stories - Fin-G</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'style.css' %}"> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
+</head>
+<body class="success-stories-body">
+
+    <header class="p-4 bg-gray-800 flex justify-between items-center glass">
+        <a href="index.html" class="px-4 py-2 bg-white text-blue-700 font-bold rounded-lg shadow-md hover:bg-gray-100 transition">← Back to Home</a>
+        <h1 class="text-3xl font-extrabold text-center text-white">🌟 Success Stories</h1>
+    </header>
+
+    <section class="glass fade-in p-8 text-center">
+        <h2 class="text-4xl font-bold text-yellow-300">📢 Real Stories from Smart Investors</h2>
+        <p class="text-lg text-gray-300 mt-2">Meet the people who transformed their finances with Fin-G’s AI-powered investment guidance.</p>
+
+        <div class="story-card bg-green-300 mt-8 p-6 rounded-lg shadow-lg transform hover:scale-105 transition">
+            <h3 class="text-3xl font-bold text-green-900">📈 Ramesh’s Journey – From Savings to Smart Investing</h3>
+            <p class="mt-2 text-lg text-gray-900">Ramesh, a hardworking factory worker, saved ₹5000 every month but didn’t know where or how to invest.</p>
+            <p class="mt-2 text-red-600 font-semibold">❌ Problem: He was afraid of scams & confused by complex financial products.</p>
+            <p class="mt-2 text-blue-700 font-semibold">✅ Solution: Fin-G analyzed his risk profile and guided him towards safe mutual funds & fixed deposits.</p>
+            <p class="mt-2 text-green-900 font-bold">🚀 Result: Ramesh increased his savings by 25% in just 6 months! 🎉</p>
+        </div>
+
+        <div class="story-card bg-blue-300 mt-8 p-6 rounded-lg shadow-lg transform hover:scale-105 transition">
+            <h3 class="text-3xl font-bold text-blue-900">📊 Rahul’s Success – Avoiding Hype, Building Wealth</h3>
+            <p class="mt-2 text-lg text-gray-900">Rahul, a young IT professional, followed viral stock trends and lost ₹1.5 lakh on a bad crypto bet. 😞</p>
+            <p class="mt-2 text-red-600 font-semibold">❌ Problem: He made impulsive investments based on Twitter trends.</p>
+            <p class="mt-2 text-blue-700 font-semibold">✅ Solution: Fin-G’s sentiment analysis flagged risky stocks & helped him invest in stable tech stocks & ETFs.</p>
+            <p class="mt-2 text-blue-900 font-bold">🚀 Result: Rahul reduced risky investments by 70% and made steady profits! 🎯</p>
+        </div>
+
+    </section>
+
+    <footer class="p-4 text-center bg-gray-800 mt-10 glass">
+        <p>🔒 Your investments. Our AI. Total Trust.</p>
+    </footer>
+
+</body>
+</html>
